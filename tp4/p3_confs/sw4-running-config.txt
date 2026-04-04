@@ -1,0 +1,195 @@
+Current configuration : 3439 bytes
+!
+! Last configuration change at 13:06:37 UTC Sat Apr 4 2026
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname sw4.tp4.efrei
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+enable secret 5 $1$QiID$D4MLNvXSgaI0mvWfJox5q0
+!
+no aaa new-model
+!
+!
+!
+!
+!
+ip arp inspection vlan 10,20,30
+ip arp inspection validate src-mac ip
+no ip icmp rate-limit unreachable
+!
+!
+!
+ip dhcp snooping vlan 10,20,30
+no ip dhcp snooping information option
+ip dhcp snooping
+no ip domain-lookup
+no ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface Ethernet0/2
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet0/3
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet1/0
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface Ethernet1/1
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface Ethernet1/2
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ switchport nonegotiate
+ ip arp inspection trust
+ ip dhcp snooping trust
+!
+interface Ethernet1/3
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet2/0
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet2/1
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet2/2
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet2/3
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet3/0
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet3/1
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet3/2
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Ethernet3/3
+ switchport access vlan 999
+ switchport mode access
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+no ip http server
+no ip http secure-server
+!
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^C AUTHORIZED ACCESS ONLY. ^C
+!
+line con 0
+ exec-timeout 5 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ exec-timeout 5 0
+ login
+!
+!
+!
+end
